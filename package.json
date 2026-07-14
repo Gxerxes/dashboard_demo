@@ -1,0 +1,36 @@
+{
+  "name": "hkex-posttrade-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HKEX Post Trade Frontend Platform",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "build:platform": "turbo run build --filter=@posttrade/platform...",
+    "build:clearing": "turbo run build --filter=@posttrade/clearing...",
+    "build:settlement": "turbo run build --filter=@posttrade/settlement...",
+    "build:reporting": "turbo run build --filter=@posttrade/reporting...",
+    "test": "turbo run test",
+    "test:unit": "turbo run test:unit",
+    "test:e2e": "turbo run test:e2e",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "format": "turbo run format",
+    "clean": "turbo run clean",
+    "typecheck": "turbo run typecheck",
+    "storybook": "cd apps/storybook && pnpm storybook",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
+    "changeset:publish": "changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "turbo": "^1.13.0",
+    "typescript": "^5.4.0"
+  },
+  "packageManager": "pnpm@9.1.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

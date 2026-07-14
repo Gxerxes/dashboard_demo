@@ -1,0 +1,15 @@
+{
+  "extends": "@posttrade/tsconfig/react.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@platform/*": ["../../packages/platform/src/*"]
+    },
+    "types": ["vite/client"]
+  },
+  "include": ["src", "vite-env.d.ts"],
+  "exclude": ["node_modules", "dist", ".turbo"]
+}

@@ -1,0 +1,33 @@
+import { defineConfig } from 'tsup';
+
+export default defineConfig({
+  entry: [
+    'src/index.ts',
+    'src/auth/index.ts',
+    'src/router/index.ts',
+    'src/layout/index.ts',
+    'src/theme/index.ts',
+    'src/api/index.ts',
+    'src/state/index.ts',
+    'src/hooks/index.ts',
+    'src/permission/index.ts',
+    'src/notification/index.ts',
+    'src/i18n/index.ts',
+    'src/monitoring/index.ts',
+    'src/logging/index.ts',
+    'src/config/index.ts',
+    'src/plugin/index.ts',
+    'src/feature-flags/index.ts',
+    'src/error-boundary/index.ts',
+    'src/loading/index.ts',
+    'src/components/index.ts',
+    'src/utils/index.ts',
+  ],
+  format: ['esm', 'cjs'],
+  dts: true,
+  sourcemap: true,
+  clean: true,
+  external: ['react', 'react-dom', '@mui/material', '@emotion/react', '@emotion/styled'],
+  treeshake: true,
+  minify: false,
+});

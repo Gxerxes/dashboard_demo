@@ -1,0 +1,58 @@
+import type { PlatformConfig } from '../types';
+
+export const defaultConfig: PlatformConfig = {
+  appName: 'HKEX Post Trade Platform',
+  version: '1.0.0',
+  environment: (import.meta.env.VITE_ENV as PlatformConfig['environment']) ?? 'development',
+  api: {
+    baseUrl: import.meta.env.VITE_API_BASE_URL ?? '/api',
+    timeout: 30000,
+    retryCount: 3,
+    retryDelay: 1000,
+    headers: {},
+  },
+  auth: {
+    authority: import.meta.env.VITE_OIDC_AUTHORITY ?? '',
+    clientId: import.meta.env.VITE_OIDC_CLIENT_ID ?? '',
+    redirectUri: import.meta.env.VITE_OIDC_REDIRECT_URI ?? window.location.origin + '/callback',
+    postLogoutRedirectUri: window.location.origin,
+    responseType: 'code',
+    scope: 'openid profile email roles',
+    silentRefresh: true,
+    sessionCheck: true,
+    maxTokenLifetime: 3600,
+  },
+  theme: {
+    mode: 'light',
+    direction: 'ltr',
+    density: 'standard',
+    colorScheme: 'blue',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    fontSize: 14,
+    borderRadius: 8,
+    spacing: 8,
+  },
+  i18n: {
+    defaultLocale: 'en',
+    fallbackLocale: 'en',
+    supportedLocales: ['en', 'zh-HK', 'zh-CN'],
+    namespace: 'posttrade',
+  },
+  monitoring: {
+    enabled: false,
+    provider: 'custom',
+    sampleRate: 1.0,
+    tracesSampleRate: 0.1,
+    replaysSessionSampleRate: 0,
+    replaysOnErrorSampleRate: 1.0,
+  },
+  logging: {
+    level: 'info',
+    enableConsole: true,
+    enableRemote: false,
+    batchSize: 10,
+    flushInterval: 5000,
+  },
+  features: {},
+  plugins: [],
+};

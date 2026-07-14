@@ -1,0 +1,48 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", ".turbo/**"],
+      "env": [
+        "NODE_ENV",
+        "VITE_API_BASE_URL",
+        "VITE_OIDC_AUTHORITY",
+        "VITE_OIDC_CLIENT_ID",
+        "VITE_OIDC_REDIRECT_URI"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {
+      "dependsOn": ["^build"]
+    },
+    "lint:fix": {
+      "dependsOn": ["^build"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts", "test/**/*.tsx"]
+    },
+    "test:unit": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts", "test/**/*.tsx"]
+    },
+    "test:e2e": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "e2e/**/*.ts"]
+    },
+    "format": {
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.css"]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

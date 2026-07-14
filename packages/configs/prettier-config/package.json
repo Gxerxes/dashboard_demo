@@ -1,0 +1,10 @@
+{
+  "name": "@posttrade/prettier-config",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "dependencies": {
+    "prettier": "^3.2.0"
+  }
+}
