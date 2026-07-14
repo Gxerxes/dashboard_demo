@@ -4,7 +4,7 @@ import { selectUser } from '../auth/authSlice';
 import { checkPermission, checkRole, checkCondition } from './permissionChecker';
 import type { PermissionCondition } from '../types';
 
-interface PermissionContextValue {
+export interface PermissionContextValue {
   hasPermission: (permission: string) => boolean;
   hasPermissions: (permissions: string[]) => boolean;
   hasRole: (role: string) => boolean;

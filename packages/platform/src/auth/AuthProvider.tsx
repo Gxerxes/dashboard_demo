@@ -9,7 +9,7 @@ import { sessionManager } from './sessionManager';
 import type { AuthConfig, UserProfile } from '../types';
 import { logger } from '../logging';
 
-interface AuthContextValue {
+export interface AuthContextValue {
   authService: AuthService | null;
   login: () => Promise<void>;
   logout: () => Promise<void>;

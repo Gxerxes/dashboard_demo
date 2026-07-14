@@ -44,7 +44,7 @@ export { NotificationProvider, useNotification } from './notification';
 export { I18nProvider, useI18n, createI18n } from './i18n';
 
 // Config
-export { ConfigProvider, useConfig, defaultConfig } from './config';
+export { defaultConfig } from './config';
 
 // Monitoring
 export { MonitoringProvider, useMonitoring } from './monitoring';

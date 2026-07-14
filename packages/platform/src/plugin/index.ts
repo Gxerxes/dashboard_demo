@@ -1,4 +1,4 @@
-import type { Plugin, PluginManifest } from '../types';
+import type { Plugin, PluginContext } from '../types';
 
 class PluginRegistryClass {
   private plugins: Map<string, Plugin> = new Map();
@@ -24,7 +24,7 @@ class PluginRegistryClass {
 
   async initializeAll(context: Record<string, unknown>): Promise<void> {
     for (const plugin of this.plugins.values()) {
-      await plugin.initialize(context);
+      await plugin.initialize(context as unknown as PluginContext);
     }
   }
 

@@ -1,7 +1,7 @@
 import React, { createContext } from 'react';
 import type { FeatureFlag } from '../types';
 
-interface FeatureFlagContextValue {
+export interface FeatureFlagContextValue {
   isEnabled: (key: string) => boolean;
   getFlag: (key: string) => FeatureFlag | undefined;
   flags: FeatureFlag[];

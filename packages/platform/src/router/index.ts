@@ -11,7 +11,7 @@
 // =================================================================
 
 export { RouterProvider } from './RouterProvider';
-export { createRouteConfig } from './routeFactory';
+export { createRouteConfig, createIndexRoute } from './routeFactory';
 export { RouteGuard } from './RouteGuard';
 export { useRouteGuard } from './useRouteGuard';
 export { routeRegistry } from './routeRegistry';
