@@ -43,7 +43,7 @@ export function AuthProvider({ config, children, onAuthError }: AuthProviderProp
     sessionManager.initialize(authService);
 
     // Handle OIDC events
-    authService.events.addUserLoaded(async (user: User) => {
+    authService.events.addUserLoaded((user: User) => {
       const profile = mapUserToProfile(user);
       dispatch(authActions.setUser(profile));
       dispatch(

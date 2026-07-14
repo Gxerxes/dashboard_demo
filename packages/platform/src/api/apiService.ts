@@ -1,5 +1,5 @@
 import type { ApiClient } from './apiClient';
-import type { ApiResponse, PaginatedResponse } from '../types';
+import type { PaginatedResponse } from '../types';
 
 export class ApiService {
   constructor(protected api: ApiClient) {}

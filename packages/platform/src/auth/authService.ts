@@ -12,8 +12,8 @@ export interface AuthService {
   startSilentRenew(): void;
   stopSilentRenew(): void;
   events: {
-    addUserLoaded(callback: () => void): void;
-    removeUserLoaded(callback: () => void): void;
+    addUserLoaded(callback: (user: User) => void): void;
+    removeUserLoaded(callback: (user: User) => void): void;
     addUserUnloaded(callback: () => void): void;
     removeUserUnloaded(callback: () => void): void;
     addSilentRenewError(callback: (error: Error) => void): void;
