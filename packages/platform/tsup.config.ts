@@ -24,7 +24,7 @@ export default defineConfig({
     'src/utils/index.ts',
   ],
   format: ['esm', 'cjs'],
-  dts: true,
+  dts: false,
   sourcemap: true,
   clean: true,
   external: ['react', 'react-dom', '@mui/material', '@emotion/react', '@emotion/styled'],

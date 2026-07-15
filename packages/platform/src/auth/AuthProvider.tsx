@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import type { User } from 'oidc-client-ts';
 import { createAuthService, type AuthService } from './authService';
-import { authActions, initializeAuth, selectAuth } from './authSlice';
+import { authActions, selectAuth } from './authSlice';
 import { tokenManager } from './tokenManager';
 import { sessionManager } from './sessionManager';
 import type { AuthConfig, UserProfile } from '../types';
@@ -43,18 +43,9 @@ export function AuthProvider({ config, children, onAuthError }: AuthProviderProp
     sessionManager.initialize(authService);
 
     // Handle OIDC events
-    authService.events.addUserLoaded((user: User) => {
-      const profile = mapUserToProfile(user);
-      dispatch(authActions.setUser(profile));
-      dispatch(
-        authActions.setTokens({
-          accessToken: user.access_token,
-          refreshToken: user.refresh_token ?? null,
-          idToken: user.id_token ?? null,
-          expiresAt: user.expires_at ?? 0,
-        }),
-      );
-      logger.info('User session loaded', { userId: profile.id });
+    authService.events.addUserLoaded(() => {
+      // User already loaded automatically - just log
+      logger.info('User session loaded via OIDC event');
     });
 
     authService.events.addUserUnloaded(() => {
@@ -72,8 +63,7 @@ export function AuthProvider({ config, children, onAuthError }: AuthProviderProp
       onAuthError?.(error);
     });
 
-    // Initialize auth state
-    dispatch(initializeAuth());
+    dispatch(authActions.setInitialized());
 
     return () => {
       authService.stopSilentRenew();
@@ -113,16 +103,16 @@ export function AuthProvider({ config, children, onAuthError }: AuthProviderProp
   const handleCallback = useCallback(async () => {
     try {
       dispatch(authActions.setLoading(true));
-      const user = await authServiceRef.current?.signinRedirectCallback();
-      if (user) {
-        const profile = mapUserToProfile(user);
+      const currentUser = await authServiceRef.current?.signinRedirectCallback();
+      if (currentUser) {
+        const profile = mapUserToProfile(currentUser);
         dispatch(authActions.setUser(profile));
         dispatch(
           authActions.setTokens({
-            accessToken: user.access_token,
-            refreshToken: user.refresh_token ?? null,
-            idToken: user.id_token ?? null,
-            expiresAt: user.expires_at ?? 0,
+            accessToken: currentUser.access_token,
+            refreshToken: currentUser.refresh_token ?? null,
+            idToken: currentUser.id_token ?? null,
+            expiresAt: currentUser.expires_at ?? 0,
           }),
         );
         authServiceRef.current?.startSilentRenew();
@@ -144,12 +134,12 @@ export function AuthProvider({ config, children, onAuthError }: AuthProviderProp
 
   const getAccessToken = useCallback(async () => {
     try {
-      const user = await authServiceRef.current?.getUser();
-      if (user?.expired) {
+      const currentUser = await authServiceRef.current?.getUser();
+      if (currentUser?.expired) {
         const renewedUser = await authServiceRef.current?.renewToken();
         return renewedUser?.access_token ?? null;
       }
-      return user?.access_token ?? null;
+      return currentUser?.access_token ?? null;
     } catch {
       return null;
     }
@@ -167,7 +157,7 @@ export function AuthProvider({ config, children, onAuthError }: AuthProviderProp
     user,
   };
 
-  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
+  return React.createElement(AuthContext.Provider, { value: contextValue }, children);
 }
 
 function mapUserToProfile(user: User): UserProfile {

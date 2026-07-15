@@ -79,7 +79,7 @@ class TokenManager {
           }
         }
       } catch (error) {
-        logger.debug('Token check cycle failed', error as Error);
+        logger.debug('Token check cycle failed', { error: String(error) });
       }
     }, 60000);
   }

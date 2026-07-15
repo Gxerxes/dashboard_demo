@@ -1,4 +1,4 @@
-import { UserManager, WebStorageStateStore, type User } from 'oidc-client-ts';
+import { UserManager, WebStorageStateStore, type User, type UserManagerSettings } from 'oidc-client-ts';
 import type { AuthConfig } from '../types';
 
 export interface AuthService {
@@ -12,8 +12,8 @@ export interface AuthService {
   startSilentRenew(): void;
   stopSilentRenew(): void;
   events: {
-    addUserLoaded(callback: (user: User) => void): void;
-    removeUserLoaded(callback: (user: User) => void): void;
+    addUserLoaded(callback: () => void): void;
+    removeUserLoaded(callback: () => void): void;
     addUserUnloaded(callback: () => void): void;
     removeUserUnloaded(callback: () => void): void;
     addSilentRenewError(callback: (error: Error) => void): void;
@@ -28,7 +28,7 @@ export interface AuthService {
 }
 
 export function createAuthService(config: AuthConfig): AuthService {
-  const userManager = new UserManager({
+  const settings: UserManagerSettings = {
     authority: config.authority,
     client_id: config.clientId,
     redirect_uri: config.redirectUri,
@@ -37,21 +37,18 @@ export function createAuthService(config: AuthConfig): AuthService {
     scope: config.scope,
     automaticSilentRenew: config.silentRefresh,
     monitorSession: config.sessionCheck,
-    monitorAnonymousSession: true,
-    userStore: new WebStorageStateStore({ store: window.sessionStorage }),
     loadUserInfo: true,
-    popup_redirect_uri: config.redirectUri,
-    popupWindowFeatures: 'location=no,toolbar=no,width=600,height=800,left=100,top=100',
-    silentRequestTimeout: 10000,
-    mergeClaims: true,
-  });
+    userStore: new WebStorageStateStore({ store: window.sessionStorage }),
+  } as UserManagerSettings;
+
+  const userManager = new UserManager(settings);
 
   return {
     getUser: () => userManager.getUser(),
-    signinRedirect: () => userManager.signinRedirect({ usePkce: true }),
+    signinRedirect: () => userManager.signinRedirect() as unknown as Promise<void>,
     signinRedirectCallback: () => userManager.signinRedirectCallback(),
-    signoutRedirect: () => userManager.signoutRedirect(),
-    signoutRedirectCallback: () => userManager.signoutRedirectCallback(),
+    signoutRedirect: () => userManager.signoutRedirect() as unknown as Promise<void>,
+    signoutRedirectCallback: () => userManager.signoutRedirectCallback() as unknown as Promise<void>,
     signinSilent: () => userManager.signinSilent(),
     renewToken: async () => {
       const user = await userManager.getUser();

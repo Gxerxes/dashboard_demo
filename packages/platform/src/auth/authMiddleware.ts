@@ -1,7 +1,7 @@
 import type { Middleware } from '@reduxjs/toolkit';
 import { authActions } from './authSlice';
 
-export const authMiddleware: Middleware = (store) => (next) => (action) => {
+export const authMiddleware: Middleware = (_store) => (next) => (action) => {
   const result = next(action);
 
   // Sync auth state to session storage on relevant actions

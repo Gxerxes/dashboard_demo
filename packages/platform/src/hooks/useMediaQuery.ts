@@ -1,4 +1,4 @@
-import { useTheme, useMediaQuery as useMuiMediaQuery } from '@mui/material';
+import { useMediaQuery as useMuiMediaQuery } from '@mui/material';
 
 export function useMediaQuery(query: string): boolean {
   return useMuiMediaQuery(query);
