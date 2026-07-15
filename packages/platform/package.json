@@ -5,86 +5,86 @@
   "description": "HKEX Post Trade Frontend Platform Core",
   "license": "UNLICENSED",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./auth": {
       "types": "./dist/auth/index.d.ts",
-      "import": "./dist/auth/index.mjs"
+      "import": "./dist/auth/index.js"
     },
     "./router": {
       "types": "./dist/router/index.d.ts",
-      "import": "./dist/router/index.mjs"
+      "import": "./dist/router/index.js"
     },
     "./theme": {
       "types": "./dist/theme/index.d.ts",
-      "import": "./dist/theme/index.mjs"
+      "import": "./dist/theme/index.js"
     },
     "./layout": {
       "types": "./dist/layout/index.d.ts",
-      "import": "./dist/layout/index.mjs"
+      "import": "./dist/layout/index.js"
     },
     "./api": {
       "types": "./dist/api/index.d.ts",
-      "import": "./dist/api/index.mjs"
+      "import": "./dist/api/index.js"
     },
     "./state": {
       "types": "./dist/state/index.d.ts",
-      "import": "./dist/state/index.mjs"
+      "import": "./dist/state/index.js"
     },
     "./hooks": {
       "types": "./dist/hooks/index.d.ts",
-      "import": "./dist/hooks/index.mjs"
+      "import": "./dist/hooks/index.js"
     },
     "./permission": {
       "types": "./dist/permission/index.d.ts",
-      "import": "./dist/permission/index.mjs"
+      "import": "./dist/permission/index.js"
     },
     "./notification": {
       "types": "./dist/notification/index.d.ts",
-      "import": "./dist/notification/index.mjs"
+      "import": "./dist/notification/index.js"
     },
     "./i18n": {
       "types": "./dist/i18n/index.d.ts",
-      "import": "./dist/i18n/index.mjs"
+      "import": "./dist/i18n/index.js"
     },
     "./monitoring": {
       "types": "./dist/monitoring/index.d.ts",
-      "import": "./dist/monitoring/index.mjs"
+      "import": "./dist/monitoring/index.js"
     },
     "./logging": {
       "types": "./dist/logging/index.d.ts",
-      "import": "./dist/logging/index.mjs"
+      "import": "./dist/logging/index.js"
     },
     "./config": {
       "types": "./dist/config/index.d.ts",
-      "import": "./dist/config/index.mjs"
+      "import": "./dist/config/index.js"
     },
     "./plugin": {
       "types": "./dist/plugin/index.d.ts",
-      "import": "./dist/plugin/index.mjs"
+      "import": "./dist/plugin/index.js"
     },
     "./feature-flags": {
       "types": "./dist/feature-flags/index.d.ts",
-      "import": "./dist/feature-flags/index.mjs"
+      "import": "./dist/feature-flags/index.js"
     },
     "./error-boundary": {
       "types": "./dist/error-boundary/index.d.ts",
-      "import": "./dist/error-boundary/index.mjs"
+      "import": "./dist/error-boundary/index.js"
     },
     "./components": {
       "types": "./dist/components/index.d.ts",
-      "import": "./dist/components/index.mjs"
+      "import": "./dist/components/index.js"
     },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
-      "import": "./dist/utils/index.mjs"
+      "import": "./dist/utils/index.js"
     }
   },
   "scripts": {
